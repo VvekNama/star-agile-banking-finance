@@ -5,6 +5,7 @@ environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-pat') 
         DOCKER_IMAGE_NAME = 'bankfinance:latest'
         DOCKERHUB_REPO = 'vvek24/bankfinance'
+        K8S_TOKEN = credentials('k8s-token')
         }
     
     stages {
@@ -39,8 +40,11 @@ environment {
         
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/deployment.yml --validate=false'
-                sh 'kubectl apply -f k8s/service.yml --validate=false'
+                script {
+                   sh "kubectl --token=${K8S_TOKEN} apply -f k8s/deployment.yml"
+                }
+                // sh 'kubectl apply -f k8s/deployment.yml --validate=false'
+                // sh 'kubectl apply -f k8s/service.yml --validate=false'
             }
         }
      }
