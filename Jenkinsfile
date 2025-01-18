@@ -44,7 +44,7 @@ environment {
                     withCredentials([string(credentialsId: 'k8s-token', variable: 'K8S_TOKEN')]) {
                         // Now the token is safely injected as an environment variable
                         sh "kubectl --token=\${K8S_TOKEN} apply -f k8s/deployment.yml --validate=false"
-                   
+                    } 
                 }
                 // sh 'kubectl apply -f k8s/deployment.yml --validate=false'
                 // sh 'kubectl apply -f k8s/service.yml --validate=false'
