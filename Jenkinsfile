@@ -13,13 +13,13 @@ pipeline {
         }
         stage('Dockerize') {
             steps {
-                sh 'docker build -t BankFinance:latest .'
+                sh 'docker build -t bankfinance:latest .'
             }
         }
         // stage('Push Docker Image') {
         //     steps {
-        //         sh 'docker tag BankFinance:latest VvekNama/BankFinance:latest'
-        //         sh 'docker push VvekNama/BankFinance:latest'
+        //         sh 'docker tag bankfinance:latest VvekNama/bankfinance:latest'
+        //         sh 'docker push VvekNama/bankfinance:latest'
         //     }
         // }
     //     stage('Deploy to Kubernetes') {
