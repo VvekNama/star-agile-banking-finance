@@ -11,15 +11,15 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
-        // stage('Dockerize') {
-        //     steps {
-        //         sh 'docker build -t app:latest .'
-        //     }
-        // }
+        stage('Dockerize') {
+            steps {
+                sh 'docker build -t app:latest .'
+            }
+        }
         // stage('Push Docker Image') {
         //     steps {
-        //         sh 'docker tag app:latest <your-dockerhub-repo>/app:latest'
-        //         sh 'docker push <your-dockerhub-repo>/app:latest'
+        //         sh 'docker tag BankFinance:latest VvekNama/BankFinance:latest'
+        //         sh 'docker push VvekNama/BankFinance:latest'
         //     }
         // }
     //     stage('Deploy to Kubernetes') {
