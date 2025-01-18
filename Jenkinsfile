@@ -5,6 +5,7 @@ environment {
         DOCKERHUB_CREDENTIALS = credentials('dockerhub-pat') 
         DOCKER_IMAGE_NAME = 'bankfinance:latest'
         DOCKERHUB_REPO = 'vvek24/bankfinance'
+        }
     
     stages {
         stage('Clone Repository') {
