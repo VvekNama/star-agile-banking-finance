@@ -19,8 +19,8 @@ pipeline {
         
         stage('Push Docker Image') {
             steps {
-                sh 'docker tag bankfinance:latest VvekNama/bankfinance:latest'
-                sh 'docker push VvekNama/bankfinance:latest'
+                sh 'docker tag bankfinance:latest docker.io/vvek24/bankfinance:latest'
+                sh 'docker push docker.io/vvek24/bankfinance:latest'
             }
         }
         
