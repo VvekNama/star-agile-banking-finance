@@ -12,10 +12,10 @@ spec:
   template:
     metadata:
       labels:
-        app: medicure
+        app: finance
     spec:
       containers:
-      - name: medicure-container
-        image: 
+      - name: finance
+        image:  vvek24/bankfinance:latest
         ports:
-        - containerPort: 8080
+        - containerPort: 8081
