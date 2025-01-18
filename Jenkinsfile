@@ -39,8 +39,9 @@ environment {
         
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s-deployment.yml'
-                sh 'kubectl apply -f k8s-service.yml'
+                sh 'kubectl apply -f k8s/deployment.yml
+'
+                sh 'kubectl apply -f k8s/service.yml'
             }
         }
      }
