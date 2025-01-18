@@ -6,7 +6,8 @@ environment {
         DOCKER_IMAGE_NAME = 'bankfinance:latest'
         DOCKERHUB_REPO = 'vvek24/bankfinance'
        // K8S_TOKEN = credentials('k8s-token')
-        KUBECONFIG = credentials('k8s-token')
+        // KUBECONFIG = credentials('k8s-token')
+        KUBECONFIG = credentials('my-kubeconfig-base64-id') 
         }
     
     stages {
@@ -43,15 +44,13 @@ environment {
             steps {
 
              script {
-                    // Apply your deployment
-                    sh "kubectl --kubeconfig=${KUBECONFIG} apply -f k8s/deployment.yml  --validate=false"
-                                
-               // script {
-               //      withCredentials([string(credentialsId: 'k8s-token', variable: 'K8S_TOKEN')]) {
-               //          // Now the token is safely injected as an environment variable
-               //          sh "kubectl --token=\${K8S_TOKEN} apply -f k8s/deployment.yml --validate=false"
-                // }
+                    // Decode kubeconfig and apply deployment
+                    sh '''#!/bin/bash
+                    echo "$KUBECONFIG" | base64 -d > /tmp/kubeconfig
+                    kubectl --kubeconfig=/tmp/kubeconfig apply -f k8s/deployment.yml --validate=false
+                    '''
                 }
+                
                 // sh 'kubectl apply -f k8s/deployment.yml --validate=false'
                 // sh 'kubectl apply -f k8s/service.yml --validate=false'
             }
