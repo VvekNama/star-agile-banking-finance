@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git url: 'https://github.com/VvekNama/star-agile-banking-finance', branch: 'main'
+                git url: 'https://github.com/VvekNama/star-agile-banking-finance', branch: 'master'
             }
         }
         stage('Build') {
