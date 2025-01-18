@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Dockerize') {
             steps {
-                sh 'docker build -t app:latest .'
+                sh 'docker build -t BankFinance:latest .'
             }
         }
         // stage('Push Docker Image') {
