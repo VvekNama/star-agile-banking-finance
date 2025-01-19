@@ -14,6 +14,8 @@ environment {
         stage('Clone Repository') {
             steps {
                 git url: 'https://github.com/VvekNama/star-agile-banking-finance', branch: 'master'
+                credentialsId: 'github-token'
+                
             }
         }
         stage('Build') {
