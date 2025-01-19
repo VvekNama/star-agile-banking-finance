@@ -8,6 +8,8 @@ environment {
        // K8S_TOKEN = credentials('k8s-token')
         // KUBECONFIG = credentials('k8s-token')
         KUBECONFIG = credentials('k8s-token') 
+        CONTAINER_NAME = "finance-container"  
+    
         }
     
     stages {
@@ -25,6 +27,24 @@ environment {
                 
             }
         }
+        
+        stage('Remove Existing Container') {
+            steps {
+                script {
+                    // Check if the container exists, then remove it
+                    def containerExists = sh(script: "docker ps -a -q --filter name=${CONTAINER_NAME}", returnStdout: true).trim()
+                    if (containerExists) {
+                        echo "Container ${CONTAINER_NAME} exists, removing it."
+                        sh "docker stop ${CONTAINER_NAME}"
+                        sh "docker rm ${CONTAINER_NAME}"
+                    } else {
+                        echo "No existing container to remove."
+                    }
+                }
+            }
+        }
+
+        
         stage('Build') {
             steps {
                 sh 'mvn clean install'
@@ -55,7 +75,7 @@ environment {
                 script {
                     // Run the container in detached mode
                     sh """
-                        docker run -d --name finance-container -p 8081:8081 ${DOCKER_IMAGE_NAME}
+                        docker run -d --name ${CONTAINER_NAME} -p 8081:8081 ${DOCKER_IMAGE_NAME}
                     """
                 }
             }
