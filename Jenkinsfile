@@ -18,7 +18,7 @@ environment {
 
                  steps {
                 git(
-                    url: 'https://github.com/VvekNama/star-agile-banking-finance', branch: 'master'
+                    url: 'https://github.com/VvekNama/star-agile-banking-finance', branch: 'master',
                     credentialsId: 'github-token'
                 )
             
