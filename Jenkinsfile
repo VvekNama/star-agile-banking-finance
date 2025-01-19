@@ -7,7 +7,7 @@ environment {
         DOCKERHUB_REPO = 'vvek24/bankfinance'
        // K8S_TOKEN = credentials('k8s-token')
         // KUBECONFIG = credentials('k8s-token')
-        KUBECONFIG = credentials('my-kubeconfig-base64-id') 
+        KUBECONFIG = credentials('k8s-token') 
         }
     
     stages {
