@@ -55,7 +55,7 @@ environment {
                 script {
                     // Run the container in detached mode
                     sh """
-                        docker run -d --name finance-container -p 8081:8081 ${DOCKER_IMAGE}
+                        docker run -d --name finance-container -p 8081:8081 ${DOCKER_IMAGE_NAME}
                     """
                 }
             }
