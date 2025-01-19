@@ -48,21 +48,33 @@ environment {
                 sh 'docker push docker.io/vvek24/bankfinance:latest'
             }
         }
-        
-        stage('Deploy to Kubernetes') {
-            steps {
 
-             script {
-                    // Decode kubeconfig and apply deployment
-                    sh '''#!/bin/bash
-                    echo "$KUBECONFIG" | base64 -d > /tmp/kubeconfig
-                    kubectl --kubeconfig=/tmp/kubeconfig apply -f k8s/deployment.yml --validate=false
-                    '''
+
+         stage('Run Docker Container') {
+            steps {
+                script {
+                    // Run the container in detached mode
+                    sh """
+                        docker run -d --name finance-container -p 8081:8081 ${DOCKER_IMAGE}
+                    """
                 }
-                
-                // sh 'kubectl apply -f k8s/deployment.yml --validate=false'
-                // sh 'kubectl apply -f k8s/service.yml --validate=false'
             }
         }
+        
+        // stage('Deploy to Kubernetes') {
+        //     steps {
+
+        //      script {
+        //             // Decode kubeconfig and apply deployment
+        //             sh '''#!/bin/bash
+        //             echo "$KUBECONFIG" | base64 -d > /tmp/kubeconfig
+        //             kubectl --kubeconfig=/tmp/kubeconfig apply -f k8s/deployment.yml --validate=false
+        //             '''
+        //         }
+                
+        //         // sh 'kubectl apply -f k8s/deployment.yml --validate=false'
+        //         // sh 'kubectl apply -f k8s/service.yml --validate=false'
+        //     }
+        // }
      }
 }
